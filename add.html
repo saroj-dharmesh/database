@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Saroj's Kitchen</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Oswald:300,400,700|Roboto+Condensed:300,400,700|Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Oswald', sans-serif;
+            color: #525252;
+        }
+        .edit,.delete,button,.input-group-addon[onclick]{
+            cursor: pointer;
+        }
+        .input-group-addon[onclick]:hover{
+            background-color: #0275d8;
+            color: white;
+        }
+        .list-group-item{
+            padding-right: 90px;
+        }
+        .list-group-item span{
+            position: absolute;
+            right: 0;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+		<ul class="nav nav-tabs" role="tablist">
+		  <li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#recipes" role="tab">Recipes</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#add-new" role="tab">ADD NEW</a>
+		  </li>
+		</ul>
+		<div class="tab-content">
+		  <div class="tab-pane active" id="recipes" role="tabpanel" style="padding:20px;">
+			<div class="list-group recipes"></div>
+		  </div>
+		  <div class="tab-pane" id="add-new" role="tabpanel">
+			<form>
+				<div class="form-group">
+					<input type="text" class="form-control" name="name" id="name" placeholder="Name"> </div>
+                <div class="form-group">
+                    <select class="form-control" name="category" id="category" placeholder="Category" multiple>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Soups">Soups</option>
+                        <option value="Salads">Salads</option>
+                        <option value="Main dish">Main dish</option>
+                        <option value="Side dish">Side dish</option>
+                        <option value="Desserts">Desserts</option>
+                        <option value="Kids Fav">Kid's Fav</option>
+                        <option value="Holi Special">Holi Special</option>
+                    </select>
+                </div>
+				<div class="form-group">
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon"><i class="material-icons">schedule</i></div>
+						<input type="number" class="form-control" name="time" id="time" placeholder="Time">
+						<div class="input-group-addon">min</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon"><i class="material-icons">people</i></div>
+						<input type="number" class="form-control" name="yield" id="yield" placeholder="Yield">
+						<div class="input-group-addon">Persons</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="description" id="desc" placeholder="Description"> </div>
+				<div class="form-group">
+					<textarea class="form-control" name="tags" id="tags" Placeholder="Tags" rows="3">Dinner,Lunch,Breakfast</textarea>
+				</div>
+				<div class="form-group">
+					<ul class="list-group" for="insts"> </ul>
+					<input type="text" class="form-control" id="insts" placeholder="Instruction"> </div>
+				<div class="form-group ">
+					<ul class="list-group" for="ingreds"></ul>
+					<div class="form-inline">
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon">Value</div>
+							<input type="text" class="form-control" id="ingreds-value" placeholder="value"> 
+							<div class="input-group-addon" onclick="document.getElementById('ingreds-value').value = this.innerHTML;">¼</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingreds-value').value = this.innerHTML;">½</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingreds-value').value = this.innerHTML;">¾</div>
+							<!--div class="input-group-addon" onclick="document.getElementById('ingred-value').value = this.innerHTML;">⅓</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingred-value').value = this.innerHTML;">⅔</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingred-value').value = this.innerHTML;">⅛</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingred-value').value = this.innerHTML;">⅜</div>
+							<div class="input-group-addon" onclick="document.getElementById('ingred-value').value = this.innerHTML;">⅝</div-->
+						</div>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon">Name</div>
+							<input type="text" class="form-control" id="ingreds-name" placeholder="name" list="ingreds-name-list"> 
+							<datalist id="ingreds-name-list"></datalist>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon"><i class="material-icons">videocam</i></div>
+						<div class="input-group-addon">https://www.youtube.com/watch?v=</div>
+						<input type="url" name="youtube" class="form-control" id="youtube" placeholder="Youtube"> 
+					</div>	
+                </div>
+				<div class="alert" role="alert"></div>
+				<button type="button" class="btn btn-primary" id="submit" >
+                    Submit
+                </button>
+				<div class="form-group">
+					<label for="output">Output</label>
+					<textarea class="form-control" id="output" rows="3"></textarea>
+				</div>
+			</form>
+		  </div>
+		</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    <script src="js/add.js"></script>
+</body>
+</html>
